@@ -256,7 +256,7 @@
     color: #ffe6f0;
   }
 
-  /* ---------- NEW: LOVE LETTERS / REASONS GRID ---------- */
+  /* ---------- LOVE LETTERS / REASONS GRID ---------- */
   .reasons {
     display:grid; 
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -282,7 +282,6 @@
     align-items: center;
   }
   
-  /* Different colors for notes */
   .love-note:nth-child(1) { background: #fff9c4; transform: rotate(-2deg); }
   .love-note:nth-child(2) { background: #ffd6e8; transform: rotate(1deg); }
   .love-note:nth-child(3) { background: #e8d5ff; transform: rotate(-1deg); }
@@ -404,6 +403,7 @@
     aspect-ratio: 9/16; object-fit: cover;
     border-radius: 15px; border: 4px solid #ff6b9d;
     box-shadow: 0 0 40px rgba(255,107,157,0.6);
+    animation: zoomIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
   #photoModal p { margin-top: 20px; font-size: 1.2rem; color: #ffb8d2; font-family:'Dancing Script', cursive;}
   
@@ -417,6 +417,7 @@
   .close-btn:hover { background: #ff6b9d; transform: scale(1.1); }
   
   @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+  @keyframes zoomIn { from{ transform: scale(0.5); opacity: 0; } to{ transform: scale(1); opacity: 1; } }
 
   /* ---------- FINAL PAGE (SIDE BY SIDE) ---------- */
   .final-container {
@@ -625,7 +626,7 @@
     </div>
   </div>
 
-  <!-- SLIDE 4: TIMELINE (Moved up) -->
+  <!-- SLIDE 4: TIMELINE -->
   <div class="slide">
     <div class="slide-inner">
       <h2>Our Journey Together 🌸</h2>
@@ -655,7 +656,7 @@
     </div>
   </div>
 
-  <!-- SLIDE 5: NEW LOVE LETTER REASONS (Moved down) -->
+  <!-- SLIDE 5: NEW LOVE LETTER REASONS -->
   <div class="slide">
     <div class="slide-inner">
       <h2>Reasons I Love You 💕</h2>
@@ -707,13 +708,17 @@
           <div class="final-title">Happy Birthday to my Queen 👑</div>
           
           <div class="message-box">
-            <p>ప్రియమైన అమ్మకి,</p>
-            <p>మేము పిల్లలుగా ఉన్నప్పుడు మీరు మా కోసం చేసిన ప్రతి త్యాగం మాకు తెలుసు. మీ ప్రేమ, మీ ఓర్పు, మీ నవ్వు మాకు ఎప్పుడూ దైర్యాన్ని ఇస్తాయి. మీరు మాకు ఇచ్చినంత ప్రేమను మేము మీకు తిరిగి ఇవ్వలేము, కానీ మా జీవితాంతం మిమ్మల్ని ప్రేమిస్తాము. పుట్టినరోజు శుభాకాంక్షలు అమ్మా! ❤️</p>
-            <p>- మీ పిల్లలు</p>
+            <p>❤️ మా ప్రియమైన అమ్మకు...</p>
+            <p> అమ్మా, మా అందరి జీవితాల్లో నువ్వే ప్రేమ, నువ్వే బలం, నువ్వే మా ఆనందం! ❤️</p>
+            <p> మా కోసం నువ్వు చేసే ప్రతి చిన్న త్యాగానికి, చూపించే అపారమైన ప్రేమకు ఎప్పటికీ కృతజ్ఞులమే. </p>
+            <p>నీ ముఖంలో చిరునవ్వు ఎప్పుడూ ఇలాగే ఉండాలి. నువ్వు ఎల్లప్పుడూ ఆరోగ్యంగా, సంతోషంగా ఉండాలని మనస్ఫూర్తిగా కోరుకుంటున్నాం. </p>
+            <p> మా అందరి తరఫున నీకు జన్మదిన శుభాకాంక్షలు అమ్మా! నిన్ను ఎంతగానో ప్రేమిస్తున్నాం! ❤️🥹 </p>
+            <p> ఇట్లు, </p>
+            <p>నీ ప్రేమించే కుటుంబం ❤️</p>
           </div>
           
           <div class="audio-player-container">
-            <p>🎙️ మా ప్రేమను వినండి (Listen to our voice message)</p>
+            <p>🎙️ నాన్నగారి మాటలు మరియు ప్రేమ (Dad's voice & wishes)</p>
             <audio id="voiceoverAudio" controls>
                 <source src="voice.mp3" type="audio/mpeg">
             </audio>
@@ -836,6 +841,56 @@
   }
   setInterval(createHeart, 600);
 
+  /* ---------- MAGIC SOUND & CONFETTI FOR HEART SURPRISE ---------- */
+  function playCrackersSound() {
+    try {
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      
+      // 1. Magic Chime (ascending notes)
+      const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+      notes.forEach((freq, index) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.value = freq;
+        const startTime = audioCtx.currentTime + (index * 0.1);
+        gain.gain.setValueAtTime(0, startTime);
+        gain.gain.linearRampToValueAtTime(0.2, startTime + 0.05);
+        gain.gain.exponentialRampToValueAtTime(0.001, startTime + 1);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(startTime);
+        osc.stop(startTime + 1);
+      });
+
+      // 2. Party Cracker Sound (White Noise Burst)
+      const bufferSize = audioCtx.sampleRate * 0.5; // 0.5 seconds
+      const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        data[i] = Math.random() * 2 - 1;
+      }
+      const noise = audioCtx.createBufferSource();
+      noise.buffer = buffer;
+      
+      const noiseFilter = audioCtx.createBiquadFilter();
+      noiseFilter.type = 'highpass';
+      noiseFilter.frequency.value = 1000;
+      
+      const noiseGain = audioCtx.createGain();
+      noiseGain.gain.setValueAtTime(0.3, audioCtx.currentTime + 0.2);
+      noiseGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.7);
+      
+      noise.connect(noiseFilter);
+      noiseFilter.connect(noiseGain);
+      noiseGain.connect(audioCtx.destination);
+      noise.start(audioCtx.currentTime + 0.2);
+      
+    } catch (e) {
+      console.log("Audio API not supported");
+    }
+  }
+
   /* ---------- Surprise Heart & Modal ---------- */
   const surpriseHeart = document.getElementById('surpriseHeart');
   const photoModal = document.getElementById('photoModal');
@@ -843,7 +898,9 @@
   
   surpriseHeart.addEventListener('click', () => {
     photoModal.classList.add('show');
+    playCrackersSound();
     launchConfetti();
+    setTimeout(launchConfetti, 300);
   });
   
   closeModalBtn.addEventListener('click', () => {
@@ -1005,7 +1062,7 @@
 
   updateNavButtons();
 
-  /* ---------- NEW: LOVE LETTERS LOGIC ---------- */
+  /* ---------- LOVE LETTERS LOGIC ---------- */
   const reasons = [
     { en: "Your smile makes everything better", te: "మీ నవ్వు అన్నీ బాగుచేస్తుంది", icon: "😊" },
     { en: "You never give up on me", te: "మీరు నా మీద ఆశ వదలరు", icon: "💪" },
@@ -1050,13 +1107,13 @@
 
   function launchConfetti() {
     const colors = ['#ff6b9d','#c44569','#ffd6e8','#e8d5ff','#ffe066','#ff9f68'];
-    for (let i=0;i<120;i++) {
+    for (let i=0;i<150;i++) {
       particles.push({
-        x: innerWidth/2 + (Math.random()-0.5)*200,
-        y: innerHeight/2,
-        vx: (Math.random()-0.5)*12,
-        vy: (Math.random()-0.8)*14,
-        size: 6+Math.random()*8,
+        x: innerWidth/2 + (Math.random()-0.5)*300,
+        y: innerHeight/2 + (Math.random()-0.5)*100,
+        vx: (Math.random()-0.5)*18,
+        vy: (Math.random()-0.8)*18,
+        size: 6+Math.random()*10,
         color: colors[Math.floor(Math.random()*colors.length)],
         life: 100+Math.random()*60,
         rot: Math.random()*6.28,
