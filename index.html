@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Amma ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@700&family=Noto+Sans+Telugu:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { height:100%; overflow:hidden; }
+  
+  body {
+    font-family:'Poppins', 'Noto Sans Telugu', sans-serif;
+    background: linear-gradient(135deg, #4a154b 0%, #833471 40%, #c44569 100%);
+    color:#ffffff;
+  }
+  .telugu { font-family:'Noto Sans Telugu', sans-serif; }
+
+  /* ---------- INTRO SCREEN ---------- */
+  #intro {
+    position:fixed; inset:0; z-index:999;
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    background: linear-gradient(135deg, #2b0f3a, #4a154b, #833471);
+    text-align:center; padding:20px;
+    transition: opacity 1s, visibility 1s;
+    overflow: hidden;
+  }
+  #intro.hide { opacity:0; visibility:hidden; }
+  
+  .balloon {
+    position: absolute;
+    bottom: -100px;
+    width: 50px; height: 65px;
+    border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+    animation: floatBalloon linear infinite;
+    opacity: 0.8;
+  }
+  .balloon::after {
+    content: '';
+    position: absolute;
+    bottom: -20px; left: 50%;
+    width: 1px; height: 20px;
+    background: rgba(255,255,255,0.5);
+  }
+  @keyframes floatBalloon {
+    0% { transform: translateY(0) rotate(-5deg); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% { transform: translateY(-110vh) rotate(5deg); opacity: 0; }
+  }
+
+  .float-emoji {
+    position: absolute;
+    bottom: -50px;
+    font-size: 2rem;
+    animation: floatEmoji linear infinite;
+    opacity: 0.9;
+  }
+  @keyframes floatEmoji {
+    0% { transform: translateY(0) rotate(0deg) scale(0.8); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-110vh) rotate(20deg) scale(1.2); opacity: 0; }
+  }
+
+  #intro .gift {
+    font-size:5rem; cursor:pointer;
+    animation: giftBounce 1.5s infinite;
+    transition: transform 0.3s;
+    z-index: 2;
+  }
+  #intro .gift:hover { transform:scale(1.15); }
+  @keyframes giftBounce {
+    0%,100% { transform:translateY(0) rotate(0); }
+    50% { transform:translateY(-15px) rotate(5deg); }
+  }
+  #intro h2 {
+    font-family:'Dancing Script', cursive;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    color:#ffb8d2; margin-top:20px; z-index: 2;
+  }
+  #intro .telugu { color:#e0c4ec; margin-top:8px; font-size:1.1rem; z-index: 2; }
+  #intro .tap {
+    margin-top:25px; padding:12px 30px;
+    background:linear-gradient(45deg,#ff6b9d,#c44569);
+    color:#fff; border:none; border-radius:50px;
+    font-size:1rem; font-weight:600; cursor:pointer;
+    box-shadow:0 8px 25px rgba(196,69,105,0.6);
+    font-family:'Poppins'; z-index: 2;
+  }
+
+  /* ---------- FLOATING HEARTS ---------- */
+  .floating-hearts {
+    position:fixed; inset:0; pointer-events:none; z-index:1; overflow:hidden;
+  }
+  .heart {
+    position:absolute; font-size:20px; opacity:0.6;
+    animation: floatUp linear infinite;
+  }
+  @keyframes floatUp {
+    0% { transform: translateY(100vh) scale(0.5); opacity:0; }
+    10% { opacity:0.8; }
+    90% { opacity:0.8; }
+    100% { transform: translateY(-10vh) scale(1.2); opacity:0; }
+  }
+
+  /* ---------- TOP HEADER ---------- */
+  #topHeader {
+    position:fixed; top:0; left:0; width:100%; z-index:100;
+    padding:15px 25px; display:flex; align-items:center;
+    cursor:pointer; transition: background 0.3s;
+  }
+  #topHeader:hover { background:rgba(0,0,0,0.2); }
+  #topHeader h3 { font-family:'Poppins'; font-size:1rem; color:#fff; display:flex; align-items:center; gap:8px;}
+
+  /* ---------- HORIZONTAL SLIDER ---------- */
+  #slider {
+    position:fixed; inset:0; z-index:2;
+    display:flex; overflow-x:hidden; scroll-behavior:smooth;
+  }
+  .slide {
+    min-width:100vw; height:100vh;
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    padding:60px 30px 40px;
+    overflow-y:auto;
+  }
+  .slide-inner {
+    max-width:1000px; width:100%;
+    animation: slideIn 0.8s ease;
+    padding-top: 20px;
+  }
+  @keyframes slideIn {
+    from { opacity:0; transform:translateX(40px); }
+    to { opacity:1; transform:translateX(0); }
+  }
+
+  .slide h2 {
+    font-family:'Dancing Script', cursive;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    text-align:center; color:#ff9ebf; margin-bottom:8px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  }
+  .slide h2.telugu-title {
+    font-family:'Noto Sans Telugu', sans-serif;
+    font-weight:600; font-size: clamp(1rem, 3vw, 1.4rem);
+    color:#e0c4ec; text-align:center; margin-bottom:30px;
+  }
+
+  /* Slide 1: Hero */
+  .hero-title {
+    font-family:'Dancing Script', cursive;
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    background: linear-gradient(45deg, #ffb8d2, #ff6b9d, #ffb8d2);
+    -webkit-background-clip:text; background-clip:text;
+    -webkit-text-fill-color:transparent;
+    text-align:center;
+    animation: glow 3s ease-in-out infinite;
+  }
+  @keyframes glow {
+    0%,100% { filter: drop-shadow(0 0 10px rgba(255,107,157,0.5)); }
+    50% { filter: drop-shadow(0 0 25px rgba(255,107,157,0.9)); }
+  }
+  .hero-name { text-align:center; font-size: clamp(1.2rem, 3vw, 1.6rem); font-weight:600; color:#ff9ebf; margin:10px 0; }
+  .hero-sub { text-align:center; color:#f0d3f7; max-width:600px; margin:0 auto; line-height:1.7; font-size:0.95rem; }
+  .hero-sub-telugu { text-align:center; color:#f0d3f7; max-width:600px; margin:12px auto 0; line-height:1.8; font-size:0.95rem; }
+
+  /* Gallery */
+  .gallery {
+    display:grid; 
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap:25px;
+    padding: 10px;
+  }
+  .polaroid {
+    background:#fff; padding:15px 15px 20px;
+    border-radius:4px; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transform: rotate(-3deg); 
+    transition: transform 0.4s;
+    position: relative;
+  }
+  .polaroid:nth-child(even) { transform: rotate(3deg); }
+  .polaroid:hover { transform: rotate(0deg) scale(1.08); z-index:5; }
+  
+  .polaroid img { 
+    width:100%; height:220px; object-fit:cover; border-radius:2px;
+    background: #e0c4ec;
+    display: block;
+  }
+
+  /* ---------- GAME GRID (HBD AMMA) ---------- */
+  .game-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 15px;
+    margin: 20px auto;
+    max-width: 800px;
+  }
+  
+  .game-card {
+    perspective: 1000px;
+    height: 120px;
+    cursor: pointer;
+  }
+  
+  .game-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+  }
+  
+  .game-card.flipped .game-inner {
+    transform: rotateY(180deg);
+  }
+  
+  .game-front, .game-back {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    padding: 5px;
+  }
+  
+  .game-front {
+    background: linear-gradient(135deg, #b83280, #833471);
+    font-size: 2.5rem;
+  }
+  
+  .game-back {
+    background: linear-gradient(135deg, #ff6b9d, #c44569);
+    transform: rotateY(180deg);
+    color: #fff;
+  }
+  
+  .game-back h3 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+    line-height: 1;
+    margin-bottom: 5px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+  }
+  
+  .game-back p {
+    font-size: 0.7rem;
+    line-height: 1.2;
+    color: #ffe6f0;
+  }
+
+  /* Reasons */
+  .reasons {
+    display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap:15px;
+  }
+  .flip-card { perspective:1000px; height:150px; cursor:pointer; }
+  .flip-inner {
+    position:relative; width:100%; height:100%;
+    transition: transform 0.7s; transform-style:preserve-3d;
+  }
+  .flip-card.flipped .flip-inner { transform: rotateY(180deg); }
+  .flip-front, .flip-back {
+    position:absolute; inset:0; backface-visibility:hidden;
+    border-radius:16px; display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    padding:14px; text-align:center;
+    box-shadow:0 6px 20px rgba(0,0,0,0.3);
+  }
+  .flip-front { background: linear-gradient(135deg, #833471, #c44569); font-size:2rem; }
+  .flip-back {
+    background: linear-gradient(135deg, #c44569, #ff6b9d);
+    color:#fff; transform: rotateY(180deg);
+    font-size:0.85rem; line-height:1.4;
+  }
+  .flip-back .telugu { font-size:0.8rem; margin-top:5px; opacity:0.9; }
+
+  /* Timeline */
+  .timeline { position:relative; padding-left:25px; max-width:700px; margin:0 auto; }
+  .timeline::before {
+    content:''; position:absolute; left:8px; top:0; bottom:0;
+    width:3px; background:linear-gradient(#ff6b9d, #ffb8d2);
+    border-radius:2px;
+  }
+  .timeline-item {
+    position:relative; margin-bottom:18px;
+    background:rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    padding:14px 18px; border-radius:14px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .timeline-item::before {
+    content:'💖'; position:absolute; left:-38px; top:14px; font-size:1.1rem;
+  }
+  .timeline-item h3 { color:#ff9ebf; margin-bottom:5px; font-size:1rem; }
+  .timeline-item p { color:#f0d3f7; font-size:0.85rem; line-height:1.5; }
+  .timeline-item p.telugu { font-size:0.85rem; margin-top:4px; }
+
+  /* Thank you */
+  .thankyou-grid {
+    display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+    gap:15px;
+  }
+  .thank-card {
+    background:rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    padding:18px; border-radius:16px; text-align:center;
+    box-shadow:0 6px 20px rgba(0,0,0,0.2);
+    transition: transform 0.3s;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .thank-card:hover { transform:translateY(-5px); background:rgba(255,255,255,0.15); }
+  .thank-card .emoji { font-size:1.8rem; display:block; margin-bottom:6px; }
+  .thank-card p { color:#f0d3f7; font-size:0.85rem; line-height:1.5; }
+  .thank-card p.telugu { font-size:0.8rem; margin-top:3px; }
+
+  /* Heart Surprise Page */
+  .surprise-heart-btn {
+    font-size: 6rem; cursor: pointer; 
+    animation: heartBeat 1.5s infinite; 
+    transition: transform 0.3s;
+    filter: drop-shadow(0 0 20px rgba(255,107,157,0.8));
+    display: inline-block;
+  }
+  .surprise-heart-btn:hover { transform: scale(1.1); }
+  @keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.15); }
+    50% { transform: scale(1); }
+    75% { transform: scale(1.15); }
+  }
+  
+  /* Popup Modal for Mom's Photo with Close Button */
+  #photoModal {
+    position:fixed; inset:0; z-index:1000;
+    background:rgba(0,0,0,0.85); backdrop-filter:blur(8px);
+    display:none; align-items:center; justify-content:center;
+    flex-direction:column; padding:20px;
+  }
+  #photoModal.show { display:flex; animation: fadeIn 0.5s; }
+  #photoModal img {
+    width: auto; height: 75vh; max-width: 100%;
+    aspect-ratio: 9/16; object-fit: cover;
+    border-radius: 15px; border: 4px solid #ff6b9d;
+    box-shadow: 0 0 40px rgba(255,107,157,0.6);
+  }
+  #photoModal p { margin-top: 20px; font-size: 1.2rem; color: #ffb8d2; font-family:'Dancing Script', cursive;}
+  
+  .close-btn {
+    position: absolute; top: 20px; right: 25px;
+    font-size: 2rem; color: #fff; cursor: pointer;
+    background: rgba(255, 107, 157, 0.5); width: 45px; height: 45px;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    transition: background 0.3s, transform 0.3s;
+  }
+  .close-btn:hover { background: #ff6b9d; transform: scale(1.1); }
+  
+  @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+
+  /* Final Page */
+  .final-page { text-align: center; position: relative; }
+  .final-page img {
+    width: 100%; max-width: 500px; height: 350px;
+    object-fit: cover; border-radius: 20px;
+    border: 5px solid #ff6b9d; box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+    margin-bottom: 20px;
+  }
+  .final-title {
+    font-family:'Dancing Script', cursive;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    background: linear-gradient(45deg, #ffb8d2, #ff6b9d, #ffb8d2);
+    -webkit-background-clip:text; background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation: glow 3s ease-in-out infinite;
+  }
+  
+  /* Message Box */
+  .message-box {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 25px;
+    border-radius: 20px;
+    margin: 20px auto;
+    max-width: 600px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  }
+  .message-box p {
+    font-family: 'Noto Sans Telugu', sans-serif;
+    color: #f0d3f7;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 10px;
+  }
+
+  /* Audio Player Style */
+  .audio-player-container {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .audio-player-container p {
+    font-size: 0.9rem;
+    color: #e0c4ec;
+  }
+  audio {
+    width: 100%;
+    max-width: 400px;
+    height: 50px;
+    border-radius: 25px;
+    outline: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  }
+  audio::-webkit-media-controls-panel { background-color: #ff9ebf; }
+  audio::-webkit-media-controls-play-button { background-color: #c44569; border-radius: 50%; }
+
+  /* Navigation */
+  .nav-btn {
+    position:fixed; top:50%; transform:translateY(-50%);
+    z-index:50; width:50px; height:50px; border-radius:50%;
+    background:rgba(255,107,157,0.3); backdrop-filter: blur(5px);
+    border: 1px solid rgba(255,255,255,0.3);
+    color:#fff; font-size:1.4rem; cursor:pointer;
+    box-shadow:0 8px 20px rgba(0,0,0,0.3);
+    transition: transform 0.2s, background 0.3s;
+  }
+  .nav-btn:hover:not(:disabled) { background:rgba(255,107,157,0.8); transform:translateY(-50%) scale(1.1); }
+  .nav-btn:disabled { opacity:0.3; cursor:not-allowed; }
+  #prevBtn { left:15px; }
+  #nextBtn { right:15px; }
+
+  /* Dots */
+  .dots {
+    position:fixed; bottom:20px; left:50%; transform:translateX(-50%);
+    z-index:50; display:flex; gap:10px;
+  }
+  .dot {
+    width:10px; height:10px; border-radius:50%;
+    background:rgba(255,255,255,0.3); cursor:pointer;
+    transition: all 0.3s;
+  }
+  .dot.active { background:#ff6b9d; transform:scale(1.3); box-shadow: 0 0 10px #ff6b9d; }
+
+  /* Music btn */
+  .music-btn {
+    position:fixed; top:15px; right:20px; z-index:60;
+    width:45px; height:45px; border-radius:50%;
+    background:linear-gradient(45deg,#ff6b9d,#c44569);
+    color:#fff; border:none; font-size:1.2rem; cursor:pointer;
+    box-shadow:0 8px 25px rgba(0,0,0,0.4);
+  }
+  #confetti { position:fixed; inset:0; pointer-events:none; z-index:100; }
+
+  @media (max-width: 600px) {
+    .nav-btn { width:40px; height:40px; font-size:1.1rem; }
+    #prevBtn { left:8px; } #nextBtn { right:8px; }
+    .slide { padding:80px 15px 40px; }
+    .balloon { width: 35px; height: 45px; }
+    .final-page img { height: 250px; }
+    .game-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .game-card { height: 100px; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="confetti"></canvas>
+
+<!-- INTRO SCREEN -->
+<div id="intro">
+  <div class="gift" id="giftBox">🎁</div>
+  <h2>A Special Surprise Awaits...</h2>
+  <p class="telugu">మీ కోసం ఒక ప్రత్యేక బహుమతి...</p>
+  <button class="tap" id="openBtn">Tap to Open 💝</button>
+</div>
+
+<!-- HEADER TO GO BACK -->
+<div id="topHeader" title="Click to see surprise again">
+  <h3>← Happy Birthday Amma ❤️</h3>
+</div>
+
+<!-- FLOATING HEARTS -->
+<div class="floating-hearts" id="hearts"></div>
+
+<!-- MOM PHOTO MODAL -->
+<div id="photoModal">
+  <div class="close-btn" id="closeModalBtn">✖</div>
+  <img id="momPhoto" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=800&h=1400&fit=crop" alt="Mom">
+  <p>My Beautiful Mom ❤️</p>
+</div>
+
+<!-- HORIZONTAL SLIDER -->
+<div id="slider">
+
+  <!-- SLIDE 1: HERO -->
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="hero-title">Happy Birthday Amma ❤️</div>
+      <div class="hero-name">To the World's Best Mom</div>
+      <p class="hero-sub">Today is all about you — your smile, your love, and the beautiful person you are. This little corner of the internet is made just for you, with all my heart.</p>
+      <p class="hero-sub-telugu telugu">ఈ రోజు మీ కోసమే — మీ నవ్వు, మీ ప్రేమ, మీ అందమైన వ్యక్తిత్వం కోసం. ఈ చిన్న ప్రపంచాన్ని నా పూర్తి హృదయంతో మీ కోసం తయారు చేశాను.</p>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: GALLERY -->
+  <div class="slide">
+    <div class="slide-inner">
+      <h2>Our Beautiful Memories 📸</h2>
+      <h2 class="telugu-title telugu">మన అందమైన జ్ఞాపకాలు</h2>
+      
+      <div class="gallery">
+        <div class="polaroid"><img src="YOUR_PHOTO_1.jpg" alt="Memory 1"></div>
+        <div class="polaroid"><img src="YOUR_PHOTO_2.jpg" alt="Memory 2"></div>
+        <div class="polaroid"><img src="YOUR_PHOTO_3.jpg" alt="Memory 3"></div>
+        <div class="polaroid"><img src="YOUR_PHOTO_4.jpg" alt="Memory 4"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: GAME (HBD AMMA) -->
+  <div class="slide">
+    <div class="slide-inner">
+      <h2>Find This! 🕵️‍♀️</h2>
+      <h2 class="telugu-title telugu">దీన్ని కనుగొనండి! (HBD AMMA)</h2>
+      
+      <div class="game-grid" id="gameGrid">
+        <!-- JS will populate this -->
+      </div>
+      
+      <p id="unlockMsg" style="text-align: center; color: #ff9ebf; margin-top: 20px; font-weight: 600;">
+        Open at least 3 grids to unlock next page (ఇంకా 3 గ్రిడ్స్ ఓపెన్ చేయండి)
+      </p>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: REASONS -->
+  <div class="slide">
+    <div class="slide-inner">
+      <h2>Reasons I Love You 💕</h2>
+      <h2 class="telugu-title telugu">నేను మిమ్మల్ని ప్రేమించడానికి కారణాలు</h2>
+      <div class="reasons" id="reasonsGrid"></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: TIMELINE -->
+  <div class="slide">
+    <div class="slide-inner">
+      <h2>Our Journey Together 🌸</h2>
+      <h2 class="telugu-title telugu">మన ప్రయాణం కలిసి</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <h3>My Childhood</h3>
+          <p>You stayed awake all night when I was sick and made every fear disappear with just one hug.</p>
+          <p class="telugu">నేను అనారోగ్యంగా ఉన్నప్పుడు మీరు రాత్రంతా మేల్కొని ఉండేవారు, ఒక్క కౌగిలింతతో భయాలన్నీ పోగొట్టేవారు.</p>
+        </div>
+        <div class="timeline-item">
+          <h3>School Days</h3>
+          <p>You woke up early to make my favorite breakfast and cheered the loudest at every event.</p>
+          <p class="telugu">నాకు ఇష్టమైన టిఫిన్ చేయడానికి పొద్దున్నే లేచేవారు, ప్రతి కార్యక్రమంలో గట్టిగా చప్పట్లు కొట్టేవారు.</p>
+        </div>
+        <div class="timeline-item">
+          <h3>Festivals & Celebrations</h3>
+          <p>The way you decorate the house and cook everyone's favorite dishes — pure magic.</p>
+          <p class="telugu">ఇల్లు అలంకరించే విధానం, అందరికీ ఇష్టమైన వంటలు చేసే విధానం — అది మాయాజాలం.</p>
+        </div>
+        <div class="timeline-item">
+          <h3>Today</h3>
+          <p>You still check on me, still worry about whether I ate, still love me like I'm your little child.</p>
+          <p class="telugu">ఈ రోజు కూడా మీరు నా గురించి ఆలోచిస్తారు, తిన్నానా అని అడుగుతారు, చిన్న పిల్లాడిలా ప్రేమిస్తారు.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: THANK YOU -->
+  <div class="slide">
+    <div class="slide-inner">
+      <h2>Thank You, Amma 🙏</h2>
+      <h2 class="telugu-title telugu">ధన్యవాదాలు అమ్మా</h2>
+      <div class="thankyou-grid">
+        <div class="thank-card"><span class="emoji">🍲</span><p>For every meal made with love.</p><p class="telugu">ప్రేమతో చేసిన ప్రతి వంటకానికి.</p></div>
+        <div class="thank-card"><span class="emoji">🤗</span><p>For hugs that fix everything.</p><p class="telugu">అన్నిటినీ సరిచేసే కౌగిలింతలకు.</p></div>
+        <div class="thank-card"><span class="emoji">🌙</span><p>For staying awake when I was sick.</p><p class="telugu">నేను అనారోగ్యంగా ఉన్నప్పుడు మేల్కొని ఉండినందుకు.</p></div>
+        <div class="thank-card"><span class="emoji">💪</span><p>For your strength and patience.</p><p class="telugu">మీ బలం మరియు ఓర్పుకు.</p></div>
+        <div class="thank-card"><span class="emoji">🎓</span><p>For believing in my dreams.</p><p class="telugu">నా కలలపై నమ్మకం ఉంచినందుకు.</p></div>
+        <div class="thank-card"><span class="emoji">❤️</span><p>For loving me unconditionally.</p><p class="telugu">నన్ను నిబంధనలు లేకుండా ప్రేమించినందుకు.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: HEART SURPRISE -->
+  <div class="slide">
+    <div class="slide-inner" style="text-align:center;">
+      <h2>A Special Gift For You</h2>
+      <h2 class="telugu-title telugu">మీ కోసం ఒక ప్రత్యేక బహుమతి</h2>
+      <div class="surprise-heart-btn" id="surpriseHeart">💖</div>
+      <p style="color:#e0c4ec; margin-top:20px;">Tap the heart to see your surprise</p>
+    </div>
+  </div>
+
+  <!-- SLIDE 8: FINAL PAGE -->
+  <div class="slide">
+    <div class="slide-inner final-page">
+      <img id="familyPhoto" src="YOUR_FAMILY_PHOTO.jpg" alt="Family">
+      
+      <div class="final-title">Happy Birthday to my Queen 👑</div>
+      
+      <div class="message-box">
+        <p>ప్రియమైన అమ్మకి,</p>
+        <p>మేము పిల్లలుగా ఉన్నప్పుడు మీరు మా కోసం చేసిన ప్రతి త్యాగం మాకు తెలుసు. మీ ప్రేమ, మీ ఓర్పు, మీ నవ్వు మాకు ఎప్పుడూ దైర్యాన్ని ఇస్తాయి. మీరు మాకు ఇచ్చినంత ప్రేమను మేము మీకు తిరిగి ఇవ్వలేము, కానీ మా జీవితాంతం మిమ్మల్ని ప్రేమిస్తాము. పుట్టినరోజు శుభాకాంక్షలు అమ్మా! ❤️</p>
+        <p>- మీ పిల్లలు</p>
+      </div>
+      
+      <div class="audio-player-container">
+        <p>🎙️ మా ప్రేమను వినండి (Listen to our voice message)</p>
+        <audio id="voiceoverAudio" controls>
+            <source src="voice.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- NAVIGATION -->
+<button class="nav-btn" id="prevBtn" disabled>‹</button>
+<button class="nav-btn" id="nextBtn">›</button>
+<div class="dots" id="dots"></div>
+<button class="music-btn" id="musicBtn" title="Play music">🎵</button>
+
+<audio id="bgMusic" src="YOUR_MUSIC_FILE.mp3" loop></audio>
+
+
+<script>
+  /* ---------- Background Music Logic ---------- */
+  const musicBtn = document.getElementById('musicBtn');
+  const bgMusic = document.getElementById('bgMusic');
+  let musicPlaying = false;
+
+  musicBtn.addEventListener('click', () => {
+    if (!musicPlaying) {
+      bgMusic.play().then(() => {
+          musicPlaying = true;
+          musicBtn.textContent = '🔇';
+      }).catch((error) => {
+          musicPlaying = true;
+          musicBtn.textContent = '🔇';
+      });
+    } else {
+      bgMusic.pause();
+      musicPlaying = false;
+      musicBtn.textContent = '🎵';
+    }
+  });
+
+  /* ---------- Intro Logic ---------- */
+  const introScreen = document.getElementById('intro');
+  
+  document.getElementById('openBtn').addEventListener('click', () => {
+    introScreen.classList.add('hide');
+    setTimeout(() => launchConfetti(), 400);
+    if (!musicPlaying) musicBtn.click();
+  });
+  
+  document.getElementById('giftBox').addEventListener('click', () => {
+    introScreen.classList.add('hide');
+    setTimeout(() => launchConfetti(), 400);
+    if (!musicPlaying) musicBtn.click();
+  });
+
+  document.getElementById('topHeader').addEventListener('click', () => {
+    introScreen.classList.remove('hide');
+  });
+
+  /* ---------- Balloons & Emojis for Intro ---------- */
+  const introContainer = document.getElementById('intro');
+  const balloonColors = ['#ff6b9d', '#c44569', '#ffb8d2', '#e8d5ff', '#ffe066', '#ff9f68'];
+  const emojis = ['❤️', '✨', '🌸', '💖', '🎈', '🎉', '💫', '🦋'];
+  
+  function createBalloon() {
+    const b = document.createElement('div');
+    b.className = 'balloon';
+    b.style.left = Math.random() * 100 + 'vw';
+    b.style.background = balloonColors[Math.floor(Math.random() * balloonColors.length)];
+    b.style.animationDuration = (8 + Math.random() * 6) + 's';
+    b.style.animationDelay = Math.random() * 5 + 's';
+    b.style.transform = `scale(${0.6 + Math.random() * 0.6})`;
+    introContainer.appendChild(b);
+    setTimeout(() => b.remove(), 20000);
+  }
+  
+  function createFloatEmoji() {
+    const e = document.createElement('div');
+    e.className = 'float-emoji';
+    e.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    e.style.left = Math.random() * 100 + 'vw';
+    e.style.fontSize = (1.5 + Math.random() * 1.5) + 'rem';
+    e.style.animationDuration = (7 + Math.random() * 6) + 's';
+    e.style.animationDelay = Math.random() * 5 + 's';
+    introContainer.appendChild(e);
+    setTimeout(() => e.remove(), 15000);
+  }
+  
+  for(let i=0; i<10; i++) createBalloon();
+  for(let i=0; i<15; i++) createFloatEmoji();
+  
+  setInterval(() => {
+    if(!introScreen.classList.contains('hide')) {
+      createBalloon();
+      createFloatEmoji();
+    }
+  }, 1200);
+
+  /* ---------- Floating hearts (Main background) ---------- */
+  const heartsContainer = document.getElementById('hearts');
+  const heartEmojis = ['❤️','💖','💕','🌸','✨','💗'];
+  function createHeart() {
+    const h = document.createElement('div');
+    h.className = 'heart';
+    h.textContent = heartEmojis[Math.floor(Math.random()*heartEmojis.length)];
+    h.style.left = Math.random()*100 + 'vw';
+    h.style.fontSize = (12 + Math.random()*20) + 'px';
+    h.style.animationDuration = (8 + Math.random()*8) + 's';
+    h.style.animationDelay = Math.random()*5 + 's';
+    heartsContainer.appendChild(h);
+    setTimeout(() => h.remove(), 18000);
+  }
+  setInterval(createHeart, 600);
+
+  /* ---------- Surprise Heart & Modal Logic ---------- */
+  const surpriseHeart = document.getElementById('surpriseHeart');
+  const photoModal = document.getElementById('photoModal');
+  const closeModalBtn = document.getElementById('closeModalBtn');
+  
+  surpriseHeart.addEventListener('click', () => {
+    photoModal.classList.add('show');
+    launchConfetti();
+  });
+  
+  closeModalBtn.addEventListener('click', () => {
+    photoModal.classList.remove('show');
+  });
+  
+  photoModal.addEventListener('click', (e) => {
+    if (e.target === photoModal) {
+      photoModal.classList.remove('show');
+    }
+  });
+
+  /* ---------- Slider navigation & LOCK LOGIC ---------- */
+  const slider = document.getElementById('slider');
+  const slides = document.querySelectorAll('.slide');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const dotsContainer = document.getElementById('dots');
+  
+  let current = 0;
+  let flippedCount = 0;
+  const GAME_SLIDE_INDEX = 2; // Index of the Game slide
+  const REQUIRED_FLIPS = 3;
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => {
+        // Disable dot clicking if it's the next page and game is not unlocked
+        if (i === GAME_SLIDE_INDEX + 1 && flippedCount < REQUIRED_FLIPS) return;
+        goTo(i);
+    });
+    dotsContainer.appendChild(dot);
+  });
+  const dots = document.querySelectorAll('.dot');
+
+  function goTo(index) {
+    if (index < 0 || index >= slides.length) return;
+    
+    // Check if trying to go past game slide without unlocking
+    if (index === GAME_SLIDE_INDEX + 1 && flippedCount < REQUIRED_FLIPS) {
+        document.getElementById('unlockMsg').style.color = '#ff6b9d';
+        document.getElementById('unlockMsg').style.transform = 'scale(1.2)';
+        setTimeout(() => {
+            document.getElementById('unlockMsg').style.transform = 'scale(1)';
+        }, 300);
+        return; // Block moving forward
+    }
+
+    current = index;
+    slider.scrollTo({ left: index * window.innerWidth, behavior: 'smooth' });
+    
+    updateNavButtons();
+    
+    dots.forEach((d, i) => d.classList.toggle('active', i === index));
+    const inner = slides[index].querySelector('.slide-inner');
+    if (inner) { inner.style.animation = 'none'; void inner.offsetWidth; inner.style.animation = 'slideIn 0.8s ease'; }
+  }
+
+  function updateNavButtons() {
+    prevBtn.disabled = current === 0;
+    // Disable next button if on game slide and haven't flipped enough
+    if (current === GAME_SLIDE_INDEX && flippedCount < REQUIRED_FLIPS) {
+        nextBtn.disabled = true;
+        nextBtn.style.opacity = '0.3';
+    } else {
+        nextBtn.disabled = current === slides.length - 1;
+        nextBtn.style.opacity = '1';
+    }
+  }
+
+  prevBtn.addEventListener('click', () => goTo(current - 1));
+  nextBtn.addEventListener('click', () => goTo(current + 1));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') goTo(current + 1);
+    if (e.key === 'ArrowLeft') goTo(current - 1);
+  });
+
+  let startX = 0;
+  slider.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+  slider.addEventListener('touchend', e => {
+    const diff = startX - e.changedTouches[0].clientX;
+    if (diff > 60) goTo(current + 1);
+    else if (diff < -60) goTo(current - 1);
+  });
+
+  window.addEventListener('resize', () => {
+    slider.scrollTo({ left: current * window.innerWidth, behavior: 'auto' });
+  });
+
+  /* ---------- NEW: HBD AMMA GAME LOGIC ---------- */
+  const gameLetters = [
+    { letter: 'H', text: 'Heart of our family' },
+    { letter: 'B', text: 'Best mom in the world' },
+    { letter: 'D', text: 'Devoted to us always' },
+    { letter: 'A', text: 'Always there for me' },
+    { letter: 'M', text: 'Makes everything better' },
+    { letter: 'M', text: 'My biggest supporter' },
+    { letter: 'A', text: 'Angelic smile' }
+  ];
+
+  const gameGrid = document.getElementById('gameGrid');
+  const unlockMsg = document.getElementById('unlockMsg');
+
+  // Shuffle letters for fun (optional, keeps it random every load)
+  const shuffledLetters = [...gameLetters].sort(() => Math.random() - 0.5);
+
+  shuffledLetters.forEach((item) => {
+    const card = document.createElement('div');
+    card.className = 'game-card';
+    card.innerHTML = `
+      <div class="game-inner">
+        <div class="game-front">💝</div>
+        <div class="game-back">
+          <h3>${item.letter}</h3>
+          <p>${item.text}</p>
+        </div>
+      </div>
+    `;
+    
+    card.addEventListener('click', () => {
+      // If already flipped, ignore
+      if (card.classList.contains('flipped')) return;
+      
+      card.classList.add('flipped');
+      flippedCount++;
+      
+      // Update message
+      if (flippedCount >= REQUIRED_FLIPS) {
+        unlockMsg.textContent = "Unlocked! You can go to next page now 🎉 (మీరు నెక్స్ట్ పేజీకి వెళ్లవచ్చు)";
+        unlockMsg.style.color = "#a8ff78";
+        updateNavButtons(); // Enable next button
+        launchConfetti();
+      } else {
+        unlockMsg.textContent = `Opened ${flippedCount} / 3 grids (ఇంకా ${REQUIRED_FLIPS - flippedCount} గ్రిడ్స్ ఓపెన్ చేయండి)`;
+      }
+    });
+    
+    gameGrid.appendChild(card);
+  });
+
+  updateNavButtons(); // Initial check
+
+  /* ---------- Standard Reasons ---------- */
+  const reasons = [
+    { en: "Your smile makes everything better", te: "మీ నవ్వు అన్నీ బాగుచేస్తుంది" },
+    { en: "You never give up on me", te: "మీరు నా మీద ఆశ వదలరు" },
+    { en: "Your food is the best in the world", te: "మీ వంట ప్రపంచంలోనే బెస్ట్" },
+    { en: "You listen without judging", te: "తీర్పు చెప్పకుండా వినిపిస్తారు" },
+    { en: "Your hugs feel like home", te: "మీ కౌగిలింత ఇంటిలా అనిపిస్తుంది" },
+    { en: "You sacrifice without complaining", te: "ఫిర్యాదు చేయకుండా త్యాగం చేస్తారు" },
+    { en: "You believe in my dreams", te: "నా కలలపై నమ్మకం ఉంచుతారు" },
+    { en: "You're the strongest person I know", te: "నాకు తెలిసిన బలమైన వ్యక్తి మీరే" },
+    { en: "You make ordinary days special", te: "సాధారణ రోజులను ప్రత్యేకం చేస్తారు" },
+    { en: "You love unconditionally", te: "నిబంధనలు లేకుండా ప్రేమిస్తారు" }
+  ];
+  const grid = document.getElementById('reasonsGrid');
+  reasons.forEach((r) => {
+    const card = document.createElement('div');
+    card.className = 'flip-card';
+    card.innerHTML = `
+      <div class="flip-inner">
+        <div class="flip-front">💝</div>
+        <div class="flip-back">${r.en}<div class="telugu">${r.te}</div></div>
+      </div>`;
+    card.addEventListener('click', () => card.classList.toggle('flipped'));
+    grid.appendChild(card);
+  });
+
+  /* ---------- Confetti ---------- */
+  const canvas = document.getElementById('confetti');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  function resizeCanvas() { canvas.width = innerWidth; canvas.height = innerHeight; }
+  resizeCanvas();
+  addEventListener('resize', resizeCanvas);
+
+  function launchConfetti() {
+    const colors = ['#ff6b9d','#c44569','#ffd6e8','#e8d5ff','#ffe066','#ff9f68'];
+    for (let i=0;i<120;i++) {
+      particles.push({
+        x: innerWidth/2 + (Math.random()-0.5)*200,
+        y: innerHeight/2,
+        vx: (Math.random()-0.5)*12,
+        vy: (Math.random()-0.8)*14,
+        size: 6+Math.random()*8,
+        color: colors[Math.floor(Math.random()*colors.length)],
+        life: 100+Math.random()*60,
+        rot: Math.random()*6.28,
+        vr: (Math.random()-0.5)*0.3
+      });
+    }
+    animateConfetti();
+  }
+  let confettiRunning = false;
+  function animateConfetti() {
+    if (confettiRunning) return;
+    confettiRunning = true;
+    function frame() {
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      particles.forEach(p => {
+        p.x += p.vx; p.y += p.vy; p.vy += 0.25; p.vx *= 0.99; p.rot += p.vr; p.life--;
+        ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+        ctx.fillStyle = p.color; ctx.globalAlpha = Math.max(0, p.life/100);
+        ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size*0.6); ctx.restore();
+      });
+      particles = particles.filter(p => p.life > 0 && p.y < canvas.height + 50);
+      if (particles.length > 0) requestAnimationFrame(frame);
+      else { confettiRunning = false; ctx.clearRect(0,0,canvas.width,canvas.height); }
+    }
+    frame();
+  }
+</script>
+</body>
+</html>
