@@ -193,7 +193,7 @@
   /* ---------- GAME GRID (HBD AMMA) ---------- */
   .game-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
     gap: 15px;
     margin: 20px auto;
     max-width: 800px;
@@ -201,7 +201,7 @@
   
   .game-card {
     perspective: 1000px;
-    height: 120px;
+    height: 130px;
     cursor: pointer;
   }
   
@@ -228,7 +228,7 @@
     justify-content: center;
     text-align: center;
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    padding: 5px;
+    padding: 8px;
   }
   
   .game-front {
@@ -251,36 +251,89 @@
   }
   
   .game-back p {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     line-height: 1.2;
     color: #ffe6f0;
   }
 
-  /* Reasons */
+  /* ---------- NEW: LOVE LETTERS / REASONS GRID ---------- */
   .reasons {
-    display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap:15px;
+    display:grid; 
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap:20px;
+    max-width: 900px;
+    margin: 0 auto;
   }
-  .flip-card { perspective:1000px; height:150px; cursor:pointer; }
-  .flip-inner {
-    position:relative; width:100%; height:100%;
-    transition: transform 0.7s; transform-style:preserve-3d;
+  
+  .love-note {
+    background: #fff;
+    color: #333;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    text-align: center;
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
-  .flip-card.flipped .flip-inner { transform: rotateY(180deg); }
-  .flip-front, .flip-back {
-    position:absolute; inset:0; backface-visibility:hidden;
-    border-radius:16px; display:flex; flex-direction:column;
-    align-items:center; justify-content:center;
-    padding:14px; text-align:center;
-    box-shadow:0 6px 20px rgba(0,0,0,0.3);
+  
+  /* Different colors for notes */
+  .love-note:nth-child(1) { background: #fff9c4; transform: rotate(-2deg); }
+  .love-note:nth-child(2) { background: #ffd6e8; transform: rotate(1deg); }
+  .love-note:nth-child(3) { background: #e8d5ff; transform: rotate(-1deg); }
+  .love-note:nth-child(4) { background: #d5f0ff; transform: rotate(2deg); }
+  .love-note:nth-child(5) { background: #ffe4cc; transform: rotate(-2deg); }
+  .love-note:nth-child(6) { background: #d4ffd4; transform: rotate(1deg); }
+  .love-note:nth-child(7) { background: #ffd6e8; transform: rotate(-1deg); }
+  .love-note:nth-child(8) { background: #fff9c4; transform: rotate(2deg); }
+  .love-note:nth-child(9) { background: #e8d5ff; transform: rotate(-2deg); }
+  .love-note:nth-child(10) { background: #d4ffd4; transform: rotate(1deg); }
+  
+  .love-note:hover {
+    transform: scale(1.05) rotate(0deg);
+    box-shadow: 8px 8px 20px rgba(0,0,0,0.4);
+    z-index: 10;
   }
-  .flip-front { background: linear-gradient(135deg, #833471, #c44569); font-size:2rem; }
-  .flip-back {
-    background: linear-gradient(135deg, #c44569, #ff6b9d);
-    color:#fff; transform: rotateY(180deg);
-    font-size:0.85rem; line-height:1.4;
+  
+  .love-note .note-icon {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
   }
-  .flip-back .telugu { font-size:0.8rem; margin-top:5px; opacity:0.9; }
+  
+  .love-note .note-text {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: #555;
+    display: none;
+  }
+  
+  .love-note .note-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  .love-note.opened {
+    background: #ffffff;
+    transform: scale(1) rotate(0deg);
+  }
+  
+  .love-note.opened .note-icon { display: none; }
+  .love-note.opened .note-title { display: none; }
+  .love-note.opened .note-text { display: block; animation: fadeIn 0.5s; }
+  
+  .love-note.opened .note-text .telugu {
+      font-family: 'Noto Sans Telugu', sans-serif;
+      font-weight: normal;
+      font-size: 0.9rem;
+      margin-top: 8px;
+      color: #666;
+  }
 
   /* Timeline */
   .timeline { position:relative; padding-left:25px; max-width:700px; margin:0 auto; }
@@ -365,21 +418,50 @@
   
   @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
 
-  /* Final Page */
-  .final-page { text-align: center; position: relative; }
-  .final-page img {
-    width: 100%; max-width: 500px; height: 350px;
-    object-fit: cover; border-radius: 20px;
-    border: 5px solid #ff6b9d; box-shadow: 0 15px 50px rgba(0,0,0,0.5);
-    margin-bottom: 20px;
+  /* ---------- FINAL PAGE (SIDE BY SIDE) ---------- */
+  .final-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
   }
+  
+  .final-left {
+    flex: 1;
+    min-width: 300px;
+    max-width: 600px;
+    text-align: center;
+  }
+  
+  .final-left img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    border-radius: 20px;
+    border: 5px solid #ff6b9d;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+  }
+  
+  .final-right {
+    flex: 1;
+    min-width: 300px;
+    max-width: 600px;
+    text-align: center;
+  }
+
   .final-title {
     font-family:'Dancing Script', cursive;
-    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-size: clamp(2rem, 4vw, 3rem);
     background: linear-gradient(45deg, #ffb8d2, #ff6b9d, #ffb8d2);
     -webkit-background-clip:text; background-clip:text;
     -webkit-text-fill-color:transparent;
     animation: glow 3s ease-in-out infinite;
+    margin-bottom: 20px;
   }
   
   /* Message Box */
@@ -389,25 +471,27 @@
     border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 25px;
     border-radius: 20px;
-    margin: 20px auto;
-    max-width: 600px;
+    margin: 0 auto 20px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    text-align: left;
   }
   .message-box p {
     font-family: 'Noto Sans Telugu', sans-serif;
     color: #f0d3f7;
-    font-size: 1.1rem;
+    font-size: 1rem;
     line-height: 1.8;
     margin-bottom: 10px;
   }
 
   /* Audio Player Style */
   .audio-player-container {
-    margin-top: 25px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    background: rgba(0,0,0,0.2);
+    padding: 15px;
+    border-radius: 15px;
   }
   .audio-player-container p {
     font-size: 0.9rem;
@@ -415,11 +499,10 @@
   }
   audio {
     width: 100%;
-    max-width: 400px;
+    max-width: 350px;
     height: 50px;
     border-radius: 25px;
     outline: none;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
   }
   audio::-webkit-media-controls-panel { background-color: #ff9ebf; }
   audio::-webkit-media-controls-play-button { background-color: #c44569; border-radius: 50%; }
@@ -461,14 +544,16 @@
   }
   #confetti { position:fixed; inset:0; pointer-events:none; z-index:100; }
 
-  @media (max-width: 600px) {
+  @media (max-width: 800px) {
+    .final-container { flex-direction: column; }
     .nav-btn { width:40px; height:40px; font-size:1.1rem; }
     #prevBtn { left:8px; } #nextBtn { right:8px; }
     .slide { padding:80px 15px 40px; }
     .balloon { width: 35px; height: 45px; }
-    .final-page img { height: 250px; }
     .game-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
     .game-card { height: 100px; }
+    .game-back h3 { font-size: 2rem; }
+    .game-back p { font-size: 0.55rem; }
   }
 </style>
 </head>
@@ -532,26 +617,15 @@
       <h2>Find This! 🕵️‍♀️</h2>
       <h2 class="telugu-title telugu">దీన్ని కనుగొనండి! (HBD AMMA)</h2>
       
-      <div class="game-grid" id="gameGrid">
-        <!-- JS will populate this -->
-      </div>
+      <div class="game-grid" id="gameGrid"></div>
       
       <p id="unlockMsg" style="text-align: center; color: #ff9ebf; margin-top: 20px; font-weight: 600;">
-        Open at least 3 grids to unlock next page (ఇంకా 3 గ్రిడ్స్ ఓపెన్ చేయండి)
+        Open at least 3 grids to unlock next page (3 గ్రిడ్స్ ఓపెన్ చేసి నెక్స్ట్ పేజీకి వెళ్లండి)
       </p>
     </div>
   </div>
 
-  <!-- SLIDE 4: REASONS -->
-  <div class="slide">
-    <div class="slide-inner">
-      <h2>Reasons I Love You 💕</h2>
-      <h2 class="telugu-title telugu">నేను మిమ్మల్ని ప్రేమించడానికి కారణాలు</h2>
-      <div class="reasons" id="reasonsGrid"></div>
-    </div>
-  </div>
-
-  <!-- SLIDE 5: TIMELINE -->
+  <!-- SLIDE 4: TIMELINE (Moved up) -->
   <div class="slide">
     <div class="slide-inner">
       <h2>Our Journey Together 🌸</h2>
@@ -581,6 +655,16 @@
     </div>
   </div>
 
+  <!-- SLIDE 5: NEW LOVE LETTER REASONS (Moved down) -->
+  <div class="slide">
+    <div class="slide-inner">
+      <h2>Reasons I Love You 💕</h2>
+      <h2 class="telugu-title telugu">నేను మిమ్మల్ని ప్రేమించడానికి కారణాలు</h2>
+      <p style="text-align:center; color:#e0c4ec; margin-bottom: 20px;">Click to open the notes</p>
+      <div class="reasons" id="reasonsGrid"></div>
+    </div>
+  </div>
+
   <!-- SLIDE 6: THANK YOU -->
   <div class="slide">
     <div class="slide-inner">
@@ -607,26 +691,36 @@
     </div>
   </div>
 
-  <!-- SLIDE 8: FINAL PAGE -->
+  <!-- SLIDE 8: FINAL PAGE (SIDE BY SIDE) -->
   <div class="slide">
-    <div class="slide-inner final-page">
-      <img id="familyPhoto" src="./mom.jpg" alt="Family">
+    <div class="slide-inner">
       
-      <div class="final-title">Happy Birthday to my Queen 👑</div>
-      
-      <div class="message-box">
-        <p>ప్రియమైన అమ్మకి,</p>
-        <p>మేము పిల్లలుగా ఉన్నప్పుడు మీరు మా కోసం చేసిన ప్రతి త్యాగం మాకు తెలుసు. మీ ప్రేమ, మీ ఓర్పు, మీ నవ్వు మాకు ఎప్పుడూ దైర్యాన్ని ఇస్తాయి. మీరు మాకు ఇచ్చినంత ప్రేమను మేము మీకు తిరిగి ఇవ్వలేము, కానీ మా జీవితాంతం మిమ్మల్ని ప్రేమిస్తాము. పుట్టినరోజు శుభాకాంక్షలు అమ్మా! ❤️</p>
-        <p>- మీ పిల్లలు</p>
-      </div>
-      
-      <div class="audio-player-container">
-        <p>🎙️ మా ప్రేమను వినండి (Listen to our voice message)</p>
-        <audio id="voiceoverAudio" controls>
-            <source src="./audio.mp3" type="audio/mpeg">
-        </audio>
-      </div>
+      <div class="final-container">
+        
+        <!-- LEFT SIDE: 16:9 Photo -->
+        <div class="final-left">
+          <img id="familyPhoto" src="YOUR_FAMILY_PHOTO.jpg" alt="Family">
+        </div>
 
+        <!-- RIGHT SIDE: Text & Audio -->
+        <div class="final-right">
+          <div class="final-title">Happy Birthday to my Queen 👑</div>
+          
+          <div class="message-box">
+            <p>ప్రియమైన అమ్మకి,</p>
+            <p>మేము పిల్లలుగా ఉన్నప్పుడు మీరు మా కోసం చేసిన ప్రతి త్యాగం మాకు తెలుసు. మీ ప్రేమ, మీ ఓర్పు, మీ నవ్వు మాకు ఎప్పుడూ దైర్యాన్ని ఇస్తాయి. మీరు మాకు ఇచ్చినంత ప్రేమను మేము మీకు తిరిగి ఇవ్వలేము, కానీ మా జీవితాంతం మిమ్మల్ని ప్రేమిస్తాము. పుట్టినరోజు శుభాకాంక్షలు అమ్మా! ❤️</p>
+            <p>- మీ పిల్లలు</p>
+          </div>
+          
+          <div class="audio-player-container">
+            <p>🎙️ మా ప్రేమను వినండి (Listen to our voice message)</p>
+            <audio id="voiceoverAudio" controls>
+                <source src="voice.mp3" type="audio/mpeg">
+            </audio>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 
@@ -638,8 +732,7 @@
 <div class="dots" id="dots"></div>
 <button class="music-btn" id="musicBtn" title="Play music">🎵</button>
 
-<audio id="bgMusic" src="YOUR_MUSIC_FILE.mp3" loop></audio>
-
+<audio id="bgMusic" src="./audio.mp3" loop></audio>
 
 <script>
   /* ---------- Background Music Logic ---------- */
@@ -647,7 +740,7 @@
   const bgMusic = document.getElementById('bgMusic');
   let musicPlaying = false;
 
-  musicBtn.addEventListener('click', () => {
+  function startMusic() {
     if (!musicPlaying) {
       bgMusic.play().then(() => {
           musicPlaying = true;
@@ -656,6 +749,12 @@
           musicPlaying = true;
           musicBtn.textContent = '🔇';
       });
+    }
+  }
+
+  musicBtn.addEventListener('click', () => {
+    if (!musicPlaying) {
+      startMusic();
     } else {
       bgMusic.pause();
       musicPlaying = false;
@@ -669,20 +768,20 @@
   document.getElementById('openBtn').addEventListener('click', () => {
     introScreen.classList.add('hide');
     setTimeout(() => launchConfetti(), 400);
-    if (!musicPlaying) musicBtn.click();
+    startMusic(); 
   });
   
   document.getElementById('giftBox').addEventListener('click', () => {
     introScreen.classList.add('hide');
     setTimeout(() => launchConfetti(), 400);
-    if (!musicPlaying) musicBtn.click();
+    startMusic(); 
   });
 
   document.getElementById('topHeader').addEventListener('click', () => {
     introScreen.classList.remove('hide');
   });
 
-  /* ---------- Balloons & Emojis for Intro ---------- */
+  /* ---------- Balloons & Emojis ---------- */
   const introContainer = document.getElementById('intro');
   const balloonColors = ['#ff6b9d', '#c44569', '#ffb8d2', '#e8d5ff', '#ffe066', '#ff9f68'];
   const emojis = ['❤️', '✨', '🌸', '💖', '🎈', '🎉', '💫', '🦋'];
@@ -721,7 +820,7 @@
     }
   }, 1200);
 
-  /* ---------- Floating hearts (Main background) ---------- */
+  /* ---------- Floating hearts ---------- */
   const heartsContainer = document.getElementById('hearts');
   const heartEmojis = ['❤️','💖','💕','🌸','✨','💗'];
   function createHeart() {
@@ -737,7 +836,7 @@
   }
   setInterval(createHeart, 600);
 
-  /* ---------- Surprise Heart & Modal Logic ---------- */
+  /* ---------- Surprise Heart & Modal ---------- */
   const surpriseHeart = document.getElementById('surpriseHeart');
   const photoModal = document.getElementById('photoModal');
   const closeModalBtn = document.getElementById('closeModalBtn');
@@ -757,7 +856,7 @@
     }
   });
 
-  /* ---------- Slider navigation & LOCK LOGIC ---------- */
+  /* ---------- Slider navigation ---------- */
   const slider = document.getElementById('slider');
   const slides = document.querySelectorAll('.slide');
   const prevBtn = document.getElementById('prevBtn');
@@ -765,16 +864,15 @@
   const dotsContainer = document.getElementById('dots');
   
   let current = 0;
-  let flippedCount = 0;
-  const GAME_SLIDE_INDEX = 2; // Index of the Game slide
+  let gameUnlocked = false; 
+  const GAME_SLIDE_INDEX = 2; 
   const REQUIRED_FLIPS = 3;
 
   slides.forEach((_, i) => {
     const dot = document.createElement('div');
     dot.className = 'dot' + (i === 0 ? ' active' : '');
     dot.addEventListener('click', () => {
-        // Disable dot clicking if it's the next page and game is not unlocked
-        if (i === GAME_SLIDE_INDEX + 1 && flippedCount < REQUIRED_FLIPS) return;
+        if (i === GAME_SLIDE_INDEX + 1 && !gameUnlocked) return;
         goTo(i);
     });
     dotsContainer.appendChild(dot);
@@ -784,30 +882,28 @@
   function goTo(index) {
     if (index < 0 || index >= slides.length) return;
     
-    // Check if trying to go past game slide without unlocking
-    if (index === GAME_SLIDE_INDEX + 1 && flippedCount < REQUIRED_FLIPS) {
+    if (index === GAME_SLIDE_INDEX + 1 && !gameUnlocked) {
         document.getElementById('unlockMsg').style.color = '#ff6b9d';
         document.getElementById('unlockMsg').style.transform = 'scale(1.2)';
         setTimeout(() => {
             document.getElementById('unlockMsg').style.transform = 'scale(1)';
         }, 300);
-        return; // Block moving forward
+        return; 
     }
 
     current = index;
     slider.scrollTo({ left: index * window.innerWidth, behavior: 'smooth' });
     
     updateNavButtons();
-    
     dots.forEach((d, i) => d.classList.toggle('active', i === index));
+    
     const inner = slides[index].querySelector('.slide-inner');
     if (inner) { inner.style.animation = 'none'; void inner.offsetWidth; inner.style.animation = 'slideIn 0.8s ease'; }
   }
 
   function updateNavButtons() {
     prevBtn.disabled = current === 0;
-    // Disable next button if on game slide and haven't flipped enough
-    if (current === GAME_SLIDE_INDEX && flippedCount < REQUIRED_FLIPS) {
+    if (current === GAME_SLIDE_INDEX && !gameUnlocked) {
         nextBtn.disabled = true;
         nextBtn.style.opacity = '0.3';
     } else {
@@ -836,26 +932,46 @@
     slider.scrollTo({ left: current * window.innerWidth, behavior: 'auto' });
   });
 
-  /* ---------- NEW: HBD AMMA GAME LOGIC ---------- */
-  const gameLetters = [
+  /* ---------- HBD AMMA GAME LOGIC ---------- */
+  const gameItems = [
     { letter: 'H', text: 'Heart of our family' },
     { letter: 'B', text: 'Best mom in the world' },
     { letter: 'D', text: 'Devoted to us always' },
     { letter: 'A', text: 'Always there for me' },
     { letter: 'M', text: 'Makes everything better' },
     { letter: 'M', text: 'My biggest supporter' },
-    { letter: 'A', text: 'Angelic smile' }
+    { letter: 'A', text: 'Angelic smile' },
+    { letter: '🎈', text: 'Party Time!' }, 
+    { letter: '🎁', text: 'Surprise!' },   
+    { letter: '💖', text: 'Love You' }     
   ];
 
   const gameGrid = document.getElementById('gameGrid');
   const unlockMsg = document.getElementById('unlockMsg');
+  const shuffledItems = [...gameItems].sort(() => Math.random() - 0.5);
+  let totalFlips = 0; 
 
-  // Shuffle letters for fun (optional, keeps it random every load)
-  const shuffledLetters = [...gameLetters].sort(() => Math.random() - 0.5);
+  function playClickSound() {
+    try {
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(880, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(1760, audioCtx.currentTime + 0.1);
+      gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.5);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.5);
+    } catch(e) {}
+  }
 
-  shuffledLetters.forEach((item) => {
+  shuffledItems.forEach((item) => {
     const card = document.createElement('div');
     card.className = 'game-card';
+    
     card.innerHTML = `
       <div class="game-inner">
         <div class="game-front">💝</div>
@@ -867,52 +983,61 @@
     `;
     
     card.addEventListener('click', () => {
-      // If already flipped, ignore
       if (card.classList.contains('flipped')) return;
       
       card.classList.add('flipped');
-      flippedCount++;
+      playClickSound(); 
+      totalFlips++;
       
-      // Update message
-      if (flippedCount >= REQUIRED_FLIPS) {
+      if (totalFlips >= REQUIRED_FLIPS && !gameUnlocked) {
+        gameUnlocked = true;
         unlockMsg.textContent = "Unlocked! You can go to next page now 🎉 (మీరు నెక్స్ట్ పేజీకి వెళ్లవచ్చు)";
         unlockMsg.style.color = "#a8ff78";
-        updateNavButtons(); // Enable next button
-        launchConfetti();
-      } else {
-        unlockMsg.textContent = `Opened ${flippedCount} / 3 grids (ఇంకా ${REQUIRED_FLIPS - flippedCount} గ్రిడ్స్ ఓపెన్ చేయండి)`;
+        updateNavButtons(); 
+        launchConfetti(); 
+      } else if (!gameUnlocked) {
+        unlockMsg.textContent = `Opened ${totalFlips} / 3 grids (ఇంకా ${REQUIRED_FLIPS - totalFlips} గ్రిడ్స్ ఓపెన్ చేయండి)`;
       }
     });
     
     gameGrid.appendChild(card);
   });
 
-  updateNavButtons(); // Initial check
+  updateNavButtons();
 
-  /* ---------- Standard Reasons ---------- */
+  /* ---------- NEW: LOVE LETTERS LOGIC ---------- */
   const reasons = [
-    { en: "Your smile makes everything better", te: "మీ నవ్వు అన్నీ బాగుచేస్తుంది" },
-    { en: "You never give up on me", te: "మీరు నా మీద ఆశ వదలరు" },
-    { en: "Your food is the best in the world", te: "మీ వంట ప్రపంచంలోనే బెస్ట్" },
-    { en: "You listen without judging", te: "తీర్పు చెప్పకుండా వినిపిస్తారు" },
-    { en: "Your hugs feel like home", te: "మీ కౌగిలింత ఇంటిలా అనిపిస్తుంది" },
-    { en: "You sacrifice without complaining", te: "ఫిర్యాదు చేయకుండా త్యాగం చేస్తారు" },
-    { en: "You believe in my dreams", te: "నా కలలపై నమ్మకం ఉంచుతారు" },
-    { en: "You're the strongest person I know", te: "నాకు తెలిసిన బలమైన వ్యక్తి మీరే" },
-    { en: "You make ordinary days special", te: "సాధారణ రోజులను ప్రత్యేకం చేస్తారు" },
-    { en: "You love unconditionally", te: "నిబంధనలు లేకుండా ప్రేమిస్తారు" }
+    { en: "Your smile makes everything better", te: "మీ నవ్వు అన్నీ బాగుచేస్తుంది", icon: "😊" },
+    { en: "You never give up on me", te: "మీరు నా మీద ఆశ వదలరు", icon: "💪" },
+    { en: "Your food is the best in the world", te: "మీ వంట ప్రపంచంలోనే బెస్ట్", icon: "🍲" },
+    { en: "You listen without judging", te: "తీర్పు చెప్పకుండా వినిపిస్తారు", icon: "👂" },
+    { en: "Your hugs feel like home", te: "మీ కౌగిలింత ఇంటిలా అనిపిస్తుంది", icon: "🤗" },
+    { en: "You sacrifice without complaining", te: "ఫిర్యాదు చేయకుండా త్యాగం చేస్తారు", icon: "❤️" },
+    { en: "You believe in my dreams", te: "నా కలలపై నమ్మకం ఉంచుతారు", icon: "🌟" },
+    { en: "You're the strongest person I know", te: "నాకు తెలిసిన బలమైన వ్యక్తి మీరే", icon: "🦸‍♀️" },
+    { en: "You make ordinary days special", te: "సాధారణ రోజులను ప్రత్యేకం చేస్తారు", icon: "✨" },
+    { en: "You love unconditionally", te: "నిబంధనలు లేకుండా ప్రేమిస్తారు", icon: "💖" }
   ];
-  const grid = document.getElementById('reasonsGrid');
+  
+  const reasonsGrid = document.getElementById('reasonsGrid');
   reasons.forEach((r) => {
     const card = document.createElement('div');
-    card.className = 'flip-card';
+    card.className = 'love-note';
+    
     card.innerHTML = `
-      <div class="flip-inner">
-        <div class="flip-front">💝</div>
-        <div class="flip-back">${r.en}<div class="telugu">${r.te}</div></div>
-      </div>`;
-    card.addEventListener('click', () => card.classList.toggle('flipped'));
-    grid.appendChild(card);
+      <div class="note-icon">${r.icon}</div>
+      <div class="note-title">Open Me</div>
+      <div class="note-text">
+        ${r.en}
+        <div class="telugu">${r.te}</div>
+      </div>
+    `;
+    
+    card.addEventListener('click', () => {
+      card.classList.toggle('opened');
+    });
+    
+    reasonsGrid.appendChild(card);
   });
 
   /* ---------- Confetti ---------- */
