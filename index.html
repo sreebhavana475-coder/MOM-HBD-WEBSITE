@@ -16,6 +16,88 @@
   }
   .telugu { font-family:'Noto Sans Telugu', sans-serif; }
 
+  /* ---------- DOB LOCK SCREEN ---------- */
+  #dobScreen {
+    position:fixed; inset:0; z-index:1000;
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    background: linear-gradient(135deg, #2b0f3a, #4a154b, #833471);
+    text-align:center; padding:20px;
+    transition: opacity 1s, visibility 1s;
+  }
+  #dobScreen.hide { opacity:0; visibility:hidden; }
+  
+  .dob-box {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,107,157,0.5);
+    padding: 40px 30px;
+    border-radius: 25px;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+    max-width: 400px;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .dob-box h2 {
+    font-family:'Dancing Script', cursive;
+    font-size: 2.5rem;
+    color: #ffb8d2;
+    margin-bottom: 10px;
+  }
+  
+  .dob-box p {
+    color: #e0c4ec;
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .dob-input {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.2rem;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    border: 2px solid #ff6b9d;
+    border-radius: 12px;
+    background: rgba(0,0,0,0.3);
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+  }
+  
+  .dob-input::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+  }
+  
+  .dob-btn {
+    margin-top: 20px;
+    padding: 15px 30px;
+    width: 100%;
+    background: linear-gradient(45deg, #ff6b9d, #c44569);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(196,69,105,0.6);
+    transition: transform 0.2s;
+  }
+  
+  .dob-btn:hover { transform: scale(1.02); }
+  
+  .error-msg {
+    color: #ff8a8a;
+    font-size: 0.9rem;
+    margin-top: 15px;
+    display: none;
+    font-weight: 600;
+  }
+
   /* ---------- INTRO SCREEN ---------- */
   #intro {
     position:fixed; inset:0; z-index:999;
@@ -419,94 +501,179 @@
   @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
   @keyframes zoomIn { from{ transform: scale(0.5); opacity: 0; } to{ transform: scale(1); opacity: 1; } }
 
-  /* ---------- FINAL PAGE (SIDE BY SIDE) ---------- */
-  .final-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    flex-wrap: wrap;
-  }
+  /* ========================================================= */
+  /* ---------- FINAL SLIDE 8: MESSAGE FROM DAD ❤️ ---------- */
+  /* ========================================================= */
   
-  .final-left {
-    flex: 1;
-    min-width: 300px;
-    max-width: 600px;
-    text-align: center;
-  }
-  
-  .final-left img {
-    width: 100%;
-    aspect-ratio: 16/9;
-    object-fit: cover;
+  .final-slide-bg {
+    background: #2d0a13; /* Deep Burgundy */
+    position: relative;
     border-radius: 20px;
-    border: 5px solid #ff6b9d;
-    box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+    padding: 40px 20px;
+    overflow: hidden;
+    box-shadow: 0 0 50px rgba(0,0,0,0.8) inset, 0 10px 40px rgba(0,0,0,0.6);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    margin: 20px auto;
+    max-width: 1100px;
+    width: 100%;
   }
   
-  .final-right {
-    flex: 1;
-    min-width: 300px;
-    max-width: 600px;
-    text-align: center;
+  .final-slide-bg::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(255, 182, 193, 0.15), transparent 70%);
+    pointer-events: none;
   }
 
-  .final-title {
-    font-family:'Dancing Script', cursive;
-    font-size: clamp(2rem, 4vw, 3rem);
-    background: linear-gradient(45deg, #ffb8d2, #ff6b9d, #ffb8d2);
-    -webkit-background-clip:text; background-clip:text;
-    -webkit-text-fill-color:transparent;
-    animation: glow 3s ease-in-out infinite;
-    margin-bottom: 20px;
+  /* Glowing particles */
+  .gold-particle {
+    position: absolute; width: 4px; height: 4px;
+    background: #ffd700; border-radius: 50%;
+    box-shadow: 0 0 10px #ffd700, 0 0 20px #ffb6c1;
+    opacity: 0; animation: floatParticle 8s linear infinite;
+  }
+  @keyframes floatParticle {
+    0% { transform: translateY(100%) scale(0.5); opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { transform: translateY(-100px) scale(1.5); opacity: 0; }
+  }
+
+  .voice-header {
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative; z-index: 2;
   }
   
-  /* Message Box */
-  .message-box {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 25px;
-    border-radius: 20px;
-    margin: 0 auto 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    text-align: left;
-  }
-  .message-box p {
-    font-family: 'Noto Sans Telugu', sans-serif;
-    color: #f0d3f7;
-    font-size: 1rem;
-    line-height: 1.8;
+  .voice-header h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: #f8e0b5; /* Champagne Gold */
+    text-shadow: 0 2px 10px rgba(255, 215, 0, 0.4);
     margin-bottom: 10px;
   }
+  
+  .voice-header h2 {
+    font-family: 'Noto Sans Telugu', sans-serif;
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: #ffb6c1; /* Rose Pink */
+    font-weight: 400;
+    margin-bottom: 15px;
+  }
+  
+  .voice-header p {
+    font-family: 'Noto Sans Telugu', sans-serif;
+    font-size: 0.95rem;
+    color: #d8a7b1;
+    font-style: italic;
+  }
 
-  /* Audio Player Style */
-  .audio-player-container {
+  .final-layout {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
+    position: relative; z-index: 2;
+  }
+
+  .final-photo-side {
+    flex: 1;
+    min-width: 280px;
+    max-width: 450px;
+  }
+
+  .elegant-frame {
+    padding: 12px;
+    background: linear-gradient(135deg, #f8e0b5, #ffb6c1, #f8e0b5);
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+    transform: rotate(-2deg);
+    transition: transform 0.4s;
+  }
+  
+  .elegant-frame:hover {
+    transform: rotate(0deg) scale(1.02);
+  }
+  
+  .elegant-frame img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 4px solid #2d0a13;
+    display: block;
+  }
+
+  .final-video-side {
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    background: rgba(0,0,0,0.2);
-    padding: 15px;
+  }
+
+  /* Premium Glassmorphism Video Player */
+  .glass-player {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 25px;
+    padding: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5), inset 0 0 20px rgba(255, 182, 193, 0.1);
+    text-align: center;
+  }
+
+  .video-wrapper {
+    width: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    margin-bottom: 20px;
+    position: relative;
+    background: #000;
+  }
+
+  .video-wrapper video {
+    width: 100%;
+    height: auto;
+    display: block;
     border-radius: 15px;
   }
-  .audio-player-container p {
-    font-size: 0.9rem;
-    color: #e0c4ec;
+
+  /* Emotional Reveal */
+  .emotional-reveal {
+    margin-top: 20px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 2s ease, transform 2s ease;
+    pointer-events: none;
   }
-  audio {
-    width: 100%;
-    max-width: 350px;
-    height: 50px;
-    border-radius: 25px;
-    outline: none;
+  
+  .emotional-reveal.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
   }
-  audio::-webkit-media-controls-panel { background-color: #ff9ebf; }
-  audio::-webkit-media-controls-play-button { background-color: #c44569; border-radius: 50%; }
+  
+  .emotional-reveal p {
+    font-family: 'Noto Sans Telugu', sans-serif;
+    font-size: 1.1rem;
+    color: #ffb6c1;
+    line-height: 1.6;
+    text-shadow: 0 0 10px rgba(255, 182, 193, 0.3);
+  }
+  
+  .emotional-reveal .english {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.3rem;
+    color: #f8e0b5;
+    margin-top: 10px;
+  }
 
   /* Navigation */
   .nav-btn {
@@ -546,7 +713,7 @@
   #confetti { position:fixed; inset:0; pointer-events:none; z-index:100; }
 
   @media (max-width: 800px) {
-    .final-container { flex-direction: column; }
+    .final-layout { flex-direction: column; }
     .nav-btn { width:40px; height:40px; font-size:1.1rem; }
     #prevBtn { left:8px; } #nextBtn { right:8px; }
     .slide { padding:80px 15px 40px; }
@@ -555,6 +722,7 @@
     .game-card { height: 100px; }
     .game-back h3 { font-size: 2rem; }
     .game-back p { font-size: 0.55rem; }
+    .final-slide-bg { padding: 20px 10px; }
   }
 </style>
 </head>
@@ -562,8 +730,19 @@
 
 <canvas id="confetti"></canvas>
 
-<!-- INTRO SCREEN -->
-<div id="intro">
+<!-- 1. DOB LOCK SCREEN -->
+<div id="dobScreen">
+  <div class="dob-box">
+    <h2>Locked Surprise 🔒</h2>
+    <p class="telugu">ఈ సర్ప్రైజ్ ఓపెన్ చేయడానికి మీ పుట్టినరోజు తేదీని నమోదు చేయండి.</p>
+    <input type="date" id="dobInput" class="dob-input" required>
+    <button id="dobBtn" class="dob-btn">Open Surprise 🎁</button>
+    <p id="dobError" class="error-msg">దయచేసి సరైన తేదీని ఎంచుకోండి!</p>
+  </div>
+</div>
+
+<!-- 2. INTRO SCREEN -->
+<div id="intro" class="hide">
   <div class="gift" id="giftBox">🎁</div>
   <h2>A Special Surprise Awaits...</h2>
   <p class="telugu">మీ కోసం ఒక ప్రత్యేక బహుమతి...</p>
@@ -571,7 +750,7 @@
 </div>
 
 <!-- HEADER TO GO BACK -->
-<div id="topHeader" title="Click to see surprise again">
+<div id="topHeader" title="Click to see surprise again" style="display:none;">
   <h3>← Happy Birthday Amma ❤️</h3>
 </div>
 
@@ -581,7 +760,7 @@
 <!-- MOM PHOTO MODAL -->
 <div id="photoModal">
   <div class="close-btn" id="closeModalBtn">✖</div>
-  <img id="momPhoto" src="./mom.jpg" alt="Mom">
+  <img id="momPhoto" src="./mom.jpg" alt="Mom" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=800&h=1400&fit=crop';">
   <p>My Beautiful Mom ❤️</p>
 </div>
 
@@ -605,9 +784,9 @@
       <h2 class="telugu-title telugu">మన అందమైన జ్ఞాపకాలు</h2>
       
       <div class="gallery">
-        <div class="polaroid"><img src="./img1.jpg" alt="Memory 2"></div>
-        <div class="polaroid"><img src="./img2.jpg" alt="Memory 3"></div>
-        <div class="polaroid"><img src="./mombunny.jpg" alt="Memory 4"></div>
+        <div class="polaroid"><img src="./img1.jpg" alt="Memory 2" onerror="this.src='https://images.unsplash.com/photo-1543342384-1f1350e27861?w=400&h=400&fit=crop';"></div>
+        <div class="polaroid"><img src="./img2.jpg" alt="Memory 3" onerror="this.src='https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=400&h=400&fit=crop';"></div>
+        <div class="polaroid"><img src="./mombunny.jpg" alt="Memory 4" onerror="this.src='https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=400&h=400&fit=crop';"></div>
       </div>
     </div>
   </div>
@@ -656,7 +835,7 @@
     </div>
   </div>
 
-  <!-- SLIDE 5: NEW LOVE LETTER REASONS -->
+  <!-- SLIDE 5: LOVE LETTER REASONS -->
   <div class="slide">
     <div class="slide-inner">
       <h2>Reasons I Love You 💕</h2>
@@ -692,40 +871,54 @@
     </div>
   </div>
 
-  <!-- SLIDE 8: FINAL PAGE (SIDE BY SIDE) -->
+  <!-- ========================================================= -->
+  <!-- SLIDE 8: MESSAGE FROM DAD -->
+  <!-- ========================================================= -->
   <div class="slide">
-    <div class="slide-inner">
+    <div class="final-slide-bg">
       
-      <div class="final-container">
+      <div class="voice-header">
+        <h1>A MESSAGE FROM DAD ❤️</h1>
+        <h2>నాన్న ప్రేమతో... అమ్మ కోసం ఒక ప్రత్యేకమైన సందేశం</h2>
+        <p>"దూరం మనల్ని వేరు చేయవచ్చు... కానీ ప్రేమను ఎప్పటికీ కాదు."</p>
+      </div>
+
+      <div class="final-layout">
         
-        <!-- LEFT SIDE: 16:9 Photo -->
-        <div class="final-left">
-          <img id="familyPhoto" src="YOUR_FAMILY_PHOTO.jpg" alt="Family">
+        <!-- LEFT: Family Photo -->
+        <div class="final-photo-side">
+          <div class="elegant-frame">
+            <img id="dadMomPhoto" src="./dad-mom-memory.jpg" alt="Dad and Mom Memory" 
+                 onerror="this.src='https://images.unsplash.com/photo-1511895426328-dc8714191300?w=800&h=600&fit=crop';">
+          </div>
         </div>
 
-        <!-- RIGHT SIDE: Text & Audio -->
-        <div class="final-right">
-          <div class="final-title">Happy Birthday to my Queen 👑</div>
-          
-          <div class="message-box">
-            <p>❤️ మా ప్రియమైన అమ్మకు...</p>
-            <p> అమ్మా, మా అందరి జీవితాల్లో నువ్వే ప్రేమ, నువ్వే బలం, నువ్వే మా ఆనందం! ❤️</p>
-            <p> మా కోసం నువ్వు చేసే ప్రతి చిన్న త్యాగానికి, చూపించే అపారమైన ప్రేమకు ఎప్పటికీ కృతజ్ఞులమే. </p>
-            <p>నీ ముఖంలో చిరునవ్వు ఎప్పుడూ ఇలాగే ఉండాలి. నువ్వు ఎల్లప్పుడూ ఆరోగ్యంగా, సంతోషంగా ఉండాలని మనస్ఫూర్తిగా కోరుకుంటున్నాం. </p>
-            <p> మా అందరి తరఫున నీకు జన్మదిన శుభాకాంక్షలు అమ్మా! నిన్ను ఎంతగానో ప్రేమిస్తున్నాం! ❤️🥹 </p>
-            <p> ఇట్లు, </p>
-            <p>నీ ప్రేమించే కుటుంబం ❤️</p>
-          </div>
-          
-          <div class="audio-player-container">
-            <p>🎙️ నాన్నగారి మాటలు మరియు ప్రేమ (Dad's voice & wishes)</p>
-            <audio id="voiceoverAudio" controls>
-                <source src="voice.mp3" type="audio/mpeg">
-            </audio>
+        <!-- RIGHT: Video Player -->
+        <div class="final-video-side">
+          <div class="glass-player">
+            
+            <div class="video-wrapper">
+              <!-- మీరు తయారు చేసిన వీడియోని ఇక్కడ 'dad-message.mp4' అని పేరు పెట్టి పెట్టండి -->
+              <video id="dadVideo" controls playsinline>
+                <source src="./dad-message.mp4" type="video/mp4">
+                మీ బ్రౌజర్ వీడియోని సపోర్ట్ చేయదు.
+              </video>
+            </div>
+
+            <!-- Emotional Reveal Message -->
+            <div class="emotional-reveal" id="emotionalMsg">
+              <p>"కొన్ని స్వరాలు మనసుకు చాలా దగ్గరగా ఉంటాయి... నాన్న గొంతు అలాంటిదే. ❤️"</p>
+              <p class="english">"Some voices never leave our hearts. They become memories we carry forever."</p>
+            </div>
+
           </div>
         </div>
 
       </div>
+      
+      <!-- Glowing Particles Container -->
+      <div id="particlesContainer"></div>
+      
     </div>
   </div>
 
@@ -740,6 +933,34 @@
 <audio id="bgMusic" src="./audio.mp3" loop></audio>
 
 <script>
+  /* ========================================================= */
+  /* 1. DOB LOCK SCREEN LOGIC */
+  /* ========================================================= */
+  const correctDOB = "2000-01-01"; // ⚠️ ఇక్కడ మీ అమ్మ పుట్టినరోజు తేదీని మార్చండి (YYYY-MM-DD)
+  
+  const dobScreen = document.getElementById('dobScreen');
+  const dobInput = document.getElementById('dobInput');
+  const dobBtn = document.getElementById('dobBtn');
+  const dobError = document.getElementById('dobError');
+  const introScreen = document.getElementById('intro');
+  const topHeader = document.getElementById('topHeader');
+
+  dobBtn.addEventListener('click', () => {
+    if (dobInput.value === correctDOB) {
+      dobScreen.classList.add('hide');
+      introScreen.classList.remove('hide');
+      topHeader.style.display = 'block';
+      launchConfetti();
+    } else {
+      dobError.style.display = 'block';
+      dobInput.style.borderColor = '#ff8a8a';
+      setTimeout(() => {
+        dobError.style.display = 'none';
+        dobInput.style.borderColor = '#ff6b9d';
+      }, 3000);
+    }
+  });
+
   /* ---------- Background Music Logic ---------- */
   const musicBtn = document.getElementById('musicBtn');
   const bgMusic = document.getElementById('bgMusic');
@@ -757,19 +978,23 @@
     }
   }
 
-  musicBtn.addEventListener('click', () => {
-    if (!musicPlaying) {
-      startMusic();
-    } else {
+  function pauseMusic() {
+    if (musicPlaying) {
       bgMusic.pause();
       musicPlaying = false;
       musicBtn.textContent = '🎵';
     }
+  }
+
+  musicBtn.addEventListener('click', () => {
+    if (!musicPlaying) {
+      startMusic();
+    } else {
+      pauseMusic();
+    }
   });
 
   /* ---------- Intro Logic ---------- */
-  const introScreen = document.getElementById('intro');
-  
   document.getElementById('openBtn').addEventListener('click', () => {
     introScreen.classList.add('hide');
     setTimeout(() => launchConfetti(), 400);
@@ -782,7 +1007,7 @@
     startMusic(); 
   });
 
-  document.getElementById('topHeader').addEventListener('click', () => {
+  topHeader.addEventListener('click', () => {
     introScreen.classList.remove('hide');
   });
 
@@ -841,13 +1066,23 @@
   }
   setInterval(createHeart, 600);
 
+  /* ---------- Gold Particles for Slide 8 ---------- */
+  const particlesContainer = document.getElementById('particlesContainer');
+  for(let i=0; i<30; i++) {
+    const p = document.createElement('div');
+    p.className = 'gold-particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.bottom = '-10px';
+    p.style.animationDelay = Math.random() * 8 + 's';
+    p.style.animationDuration = (5 + Math.random() * 5) + 's';
+    particlesContainer.appendChild(p);
+  }
+
   /* ---------- MAGIC SOUND & CONFETTI FOR HEART SURPRISE ---------- */
   function playCrackersSound() {
     try {
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      
-      // 1. Magic Chime (ascending notes)
-      const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+      const notes = [523.25, 659.25, 783.99, 1046.50];
       notes.forEach((freq, index) => {
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
@@ -863,32 +1098,21 @@
         osc.stop(startTime + 1);
       });
 
-      // 2. Party Cracker Sound (White Noise Burst)
-      const bufferSize = audioCtx.sampleRate * 0.5; // 0.5 seconds
+      const bufferSize = audioCtx.sampleRate * 0.5;
       const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
       const data = buffer.getChannelData(0);
-      for (let i = 0; i < bufferSize; i++) {
-        data[i] = Math.random() * 2 - 1;
-      }
+      for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
       const noise = audioCtx.createBufferSource();
       noise.buffer = buffer;
-      
       const noiseFilter = audioCtx.createBiquadFilter();
       noiseFilter.type = 'highpass';
       noiseFilter.frequency.value = 1000;
-      
       const noiseGain = audioCtx.createGain();
       noiseGain.gain.setValueAtTime(0.3, audioCtx.currentTime + 0.2);
       noiseGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.7);
-      
-      noise.connect(noiseFilter);
-      noiseFilter.connect(noiseGain);
-      noiseGain.connect(audioCtx.destination);
+      noise.connect(noiseFilter); noiseFilter.connect(noiseGain); noiseGain.connect(audioCtx.destination);
       noise.start(audioCtx.currentTime + 0.2);
-      
-    } catch (e) {
-      console.log("Audio API not supported");
-    }
+    } catch (e) {}
   }
 
   /* ---------- Surprise Heart & Modal ---------- */
@@ -903,17 +1127,31 @@
     setTimeout(launchConfetti, 300);
   });
   
-  closeModalBtn.addEventListener('click', () => {
-    photoModal.classList.remove('show');
-  });
-  
+  closeModalBtn.addEventListener('click', () => photoModal.classList.remove('show'));
   photoModal.addEventListener('click', (e) => {
-    if (e.target === photoModal) {
-      photoModal.classList.remove('show');
-    }
+    if (e.target === photoModal) photoModal.classList.remove('show');
   });
 
-  /* ---------- Slider navigation ---------- */
+  /* ---------- FINAL SLIDE VIDEO LOGIC ---------- */
+  const dadVideo = document.getElementById('dadVideo');
+  const emotionalMsg = document.getElementById('emotionalMsg');
+
+  // వీడియో ప్లే అయినప్పుడు బ్యాక్ గ్రౌండ్ మ్యూజిక్ ఆపడం
+  dadVideo.addEventListener('play', () => {
+    pauseMusic();
+  });
+
+  // వీడియో పూర్తయినప్పుడు ఎమోషనల్ మెసేజ్ చూపించడం
+  dadVideo.addEventListener('ended', () => {
+    emotionalMsg.classList.add('show');
+  });
+
+  // వీడియోని మళ్ళీ ప్లే చేసినప్పుడు మెసేజ్ దాచడం
+  dadVideo.addEventListener('play', () => {
+    emotionalMsg.classList.remove('show');
+  });
+
+  /* ---------- Slider Navigation & Logic ---------- */
   const slider = document.getElementById('slider');
   const slides = document.querySelectorAll('.slide');
   const prevBtn = document.getElementById('prevBtn');
@@ -946,6 +1184,11 @@
             document.getElementById('unlockMsg').style.transform = 'scale(1)';
         }, 300);
         return; 
+    }
+
+    // 8వ పేజీ నుండి బయటకు వెళ్ళేటప్పుడు వీడియోని ఆపడం
+    if (current === 7 && index !== 7) {
+        dadVideo.pause();
     }
 
     current = index;
@@ -1018,10 +1261,8 @@
       osc.frequency.exponentialRampToValueAtTime(1760, audioCtx.currentTime + 0.1);
       gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.5);
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.start();
-      osc.stop(audioCtx.currentTime + 0.5);
+      osc.connect(gain); gain.connect(audioCtx.destination);
+      osc.start(); osc.stop(audioCtx.currentTime + 0.5);
     } catch(e) {}
   }
 
